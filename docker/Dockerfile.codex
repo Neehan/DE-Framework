@@ -1,0 +1,11 @@
+FROM docker.litellm.ai/berriai/litellm@sha256:e0ac5d76ead293c1505587985c8d4360647118cf30d8005963a8f1225ee4d631
+
+COPY codex/__init__.py codex/auth.py codex/constants.py codex/patch_litellm.py /app/codex/
+COPY harness/__init__.py /app/harness/__init__.py
+COPY harness/utils/__init__.py harness/utils/constants.py /app/harness/utils/
+ENV PYTHONPATH=/app
+ENV DISABLE_AIOHTTP_TRANSPORT=true
+ENV LITELLM_LOCAL_MODEL_COST_MAP=True
+RUN /app/.venv/bin/python -m codex.patch_litellm
+ENTRYPOINT ["/app/.venv/bin/litellm"]
+CMD []

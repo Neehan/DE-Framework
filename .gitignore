@@ -216,3 +216,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local benchmark data, results, and agents.md
+/datasets/
+/results/
+
+AGENTS.md
