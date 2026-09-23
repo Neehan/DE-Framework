@@ -1,0 +1,15 @@
+*
+!pyproject.toml
+!harness/
+!harness/**/*.py
+!experiments/
+!experiments/**/*.py
+!launcher/
+!launcher/**/*.py
+!prompts/
+!prompts/**/
+!prompts/**/*.md
+!codex/
+!codex/**/*.py
+!audit/
+!audit/**/*.py

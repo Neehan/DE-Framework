@@ -1,0 +1,1 @@
+You have {{remaining_tokens}} output tokens left. Wrap up within this remaining budget. Finish any critique promptly so there is time to complete your final solution. When the budget is exhausted, the run stops and retains your last completed solution from within the budget.

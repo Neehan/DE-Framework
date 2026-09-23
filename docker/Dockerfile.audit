@@ -1,0 +1,3 @@
+# Reuse the run image's pinned SDK, dependencies, and mandatory sandbox policy.
+FROM harness:run
+COPY audit ./audit
