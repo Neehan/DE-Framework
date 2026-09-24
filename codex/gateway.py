@@ -127,7 +127,7 @@ class Gateway:
         """Keep the gateway key out of Docker command arguments, environment metadata, and host files."""
         config = {
             "model_list": [{"model_name": MODEL_ALIAS, "model_info": {"mode": "responses"},
-                            "litellm_params": {"model": f"chatgpt/{MODEL_ALIAS}", "supports_system_message": False}}],
+                            "litellm_params": {"model": f"chatgpt/responses/{MODEL_ALIAS}", "supports_system_message": False}}],
             "router_settings": {"num_retries": SDK_MAX_API_RETRIES, "timeout": PROVIDER_TIMEOUT_SECONDS,
                                 "stream_timeout": PROVIDER_TIMEOUT_SECONDS},
             "general_settings": {"master_key": key},

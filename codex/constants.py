@@ -44,3 +44,11 @@ PATCH_REPLACEMENT = '''                    if isinstance(m["content"], list) or 
                         next_m["content"] = system_content + next_content
                     else:
                         next_m["content"] = str(m["content"]) + " " + str(next_m["content"])'''
+STREAMING_PATCH_GLOB = "python*/site-packages/litellm/llms/chatgpt/responses/transformation.py"
+STREAMING_PATCH_ORIGINAL = "class ChatGPTResponsesAPIConfig(OpenAIResponsesAPIConfig):\n"
+STREAMING_PATCH_REPLACEMENT = '''class ChatGPTResponsesAPIConfig(OpenAIResponsesAPIConfig):
+    def should_fake_stream(self, model: str | None, stream: bool | None, custom_llm_provider: str | None) -> bool:
+        """Codex requires native streaming regardless of the model catalog entry."""
+        return False
+
+'''

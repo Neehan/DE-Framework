@@ -48,6 +48,7 @@ async def test_gateway_creation_keeps_key_out_of_arguments_and_retains_auth_on_s
         config = json.load(handle)
     assert config["general_settings"]["master_key"] == GATEWAY_KEY
     assert config["model_list"][0]["model_name"] == MODEL_ALIAS
+    assert config["model_list"][0]["litellm_params"]["model"] == f"chatgpt/responses/{MODEL_ALIAS}"
     docker_client.run.reset_mock(side_effect=True)
     docker_client.run.side_effect = [b"container", json.dumps([state]).encode(), b""]
     await gateway.stop(account)
