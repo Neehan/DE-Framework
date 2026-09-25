@@ -96,16 +96,28 @@ class RDEParameters(BaseParameters):
 
 
 @dataclass(frozen=True)
-class RDEPosterior:
-    """Rows represent problems; Beta shapes and case probabilities use columns for possible execution-failure counts. Later-execution concentrations use columns for completion outcomes."""
+class RDEConditionalPosterior:
+    """Store shapes for alpha|h,D, pi_1|h,D, and the relative later-execution shares pi_j/(1-pi_1).
 
-    log_evidence: NDArray[np.float64]
-    case_probabilities: NDArray[np.float64]
+    h counts short failures after discovery succeeded. Beta arrays broadcast to (problems, failure-count cases); later_execution_concentrations has shape (problems, later execution categories including noncompletion).
+    """
+
     discovery_a: NDArray[np.float64]
     discovery_b: NDArray[np.float64]
     first_execution_a: NDArray[np.float64]
     first_execution_b: NDArray[np.float64]
     later_execution_concentrations: NDArray[np.float64]
+
+
+@dataclass(frozen=True)
+class RDEPosterior(RDEConditionalPosterior):
+    """Add case_probabilities[i,h]=Pr(h|D_i) and log_evidence[i]=log E_prior[L_i] to the conditional shapes.
+
+    log_evidence omits data-only binomial and multinomial coefficients. Cases beyond a problem's observed short-failure count have probability zero.
+    """
+
+    log_evidence: NDArray[np.float64]
+    case_probabilities: NDArray[np.float64]
 
 
 @dataclass(frozen=True)

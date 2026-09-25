@@ -14,7 +14,6 @@ from scipy.special import gammaln, roots_jacobi
 from frameworks.discovery_execution.regularized_discovery_execution import RegularizedDiscoveryExecution
 from frameworks.models import BetaParameters, DirichletParameters, RDEParameters, RDEPrior
 from frameworks.utils.constants import NUM_ARMS, PRIOR_LOG_SHAPE_BOUNDS, RDE_INITIALIZATIONS, TOTAL_BUDGET
-from frameworks.utils.probabilities import discovery_execution_nll
 from tests.frameworks.constants import NUMERICAL_TOLERANCE, QUADRATURE_ORDER, ROWS
 
 
@@ -44,10 +43,10 @@ def test_joint_likelihood_and_all_allocations_match_quadrature(successes: int) -
     oracle_evidence = gammaln(concentrations.sum()) - gammaln(concentrations.sum() + counts.sum())
     oracle_evidence += np.sum(gammaln(concentrations + counts[0, active]) - gammaln(concentrations))
     log_shapes = np.log([prior.discovery.a, prior.discovery.b, *concentrations])
-    nll = discovery_execution_nll(log_shapes, np.array([successes], dtype=float), np.array([24.0]), counts)
+    framework = RegularizedDiscoveryExecution()
+    nll = framework._negative_log_likelihood(log_shapes, np.array([successes], dtype=float), np.array([24.0]), counts)
     assert nll == pytest.approx(-oracle_evidence - log(evidence), abs=NUMERICAL_TOLERANCE)
 
-    framework = RegularizedDiscoveryExecution()
     for n in NUM_ARMS:
         for k in range(1, TOTAL_BUDGET // n + 1):
             success = np.zeros_like(weights)
