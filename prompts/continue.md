@@ -1,0 +1,1 @@
+Continue working on the problem from the current conversation. You have {{budget_tokens}} additional output tokens, shared across continuation, critique, and revision. Improve and complete your solution, then provide the complete solution.

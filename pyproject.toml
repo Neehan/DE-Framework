@@ -1,0 +1,20 @@
+[project]
+name = "de-framework"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = ["claude-agent-sdk==0.1.56", "aiohttp==3.13.5", "jsonschema==4.26.0", "python-dotenv==1.2.2", "numpy==2.4.3", "scipy==1.17.1", "sympy==1.14.0", "mpmath==1.3.0"]
+
+[project.optional-dependencies]
+test = ["pytest==9.0.2", "pytest-asyncio==1.3.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
+markers = ["integration: opt-in real CLI and Docker checks using HARNESS_TEST_IMAGE"]
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.pyright]
+include = ["harness", "audit", "experiments", "frameworks", "launcher", "codex", "scripts", "tests"]
+typeCheckingMode = "standard"
+pythonVersion = "3.12"
