@@ -1,5 +1,7 @@
 # Discovery-Execution Framework for Mathematical Reasoning
 
+[Paper](https://arxiv.org/abs/2610.05322) | [Dataset](https://huggingface.co/datasets/notadib/AOBench) | [Blogpost](https://adibhasan.com/blog/discovery-execution/)
+
 ## Setup
 
 Requires [uv](https://docs.astral.sh/uv/getting-started/installation/), Python 3.12+, Bash, and a running local Docker Engine with Linux containers. Use Linux, macOS, or WSL2.
@@ -59,3 +61,16 @@ python -m launcher.frameworks --model claude-opus-4-8
 ```
 
 Both datasets and all problems are selected by default; filter with `--dataset`, `--problems`, or `--domain`. Problems need at least 24 audited unaided-1x seeds and 3 complete oracle-execution seeds. Each regularized framework learns its prior across all selected problems for the model. Predictions use `N=1,2,4` with checkpoints `K=1,...,8//N`. Outputs are `results/<dataset>/<model>/frameworks/<sg|de|r-sg|r-de>/fit.json` and `predictions.jsonl`.
+
+## Citation
+```
+@misc{hasan2026longthinking,
+      title={When Does Longer Reasoning Help? Predicting Mathematical Reasoning Through Discovery and Execution}, 
+      author={Adib Hasan and Lay Jain and Thanic Nur Samin},
+      year={2026},
+      eprint={2610.05322},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2610.05322}, 
+}
+```
